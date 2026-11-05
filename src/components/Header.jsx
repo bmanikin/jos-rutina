@@ -85,7 +85,7 @@ export default function Header({
   });
 
   return (
-    <header className="px-5 lg:px-8 pt-5 pb-4 border-b border-rose-950/40 bg-dark-900/90 backdrop-blur-md sticky top-0 z-20">
+    <header className="px-4 sm:px-5 lg:px-8 pt-4 sm:pt-5 pb-4 border-b border-rose-950/40 bg-dark-900/90 backdrop-blur-md sticky top-0 z-20 safe-top">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-3">
         {/* Logo, título y selector de modo en Desktop */}
         <div className="flex items-center gap-3">

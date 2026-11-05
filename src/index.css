@@ -3,11 +3,23 @@
 @tailwind utilities;
 
 @layer base {
-  body {
+  html, body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
     background-color: #09090b;
     color: #f4f4f5;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     -webkit-tap-highlight-color: transparent;
+  }
+
+  #root {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 }
 
@@ -37,6 +49,15 @@
 }
 .smooth-scroll::-webkit-scrollbar {
   display: none;
+}
+
+/* Safe area insets for Android and iPhone notch/navigation bars */
+.safe-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.safe-bottom {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px));
 }
 
 /* Pulse animation for active tasks */

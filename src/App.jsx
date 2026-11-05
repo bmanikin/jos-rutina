@@ -153,16 +153,16 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-dark-950 text-neutral-100 flex flex-col items-center justify-start sm:py-6 selection:bg-rose-500/30 selection:text-rose-200">
+    <div className="min-h-screen w-full bg-dark-950 text-neutral-100 flex flex-col selection:bg-rose-500/30 selection:text-rose-200">
       {/* Toast de Alerta 10 min antes */}
       <NotificationToast onOpenActivityById={handleOpenActivityById} />
 
-      {/* Contenedor principal: Envoltorio para modo Marco Móvil o Pantalla Monitor PC */}
+      {/* Contenedor principal: En móvil siempre es 100% pantalla completa edge-to-edge; en PC se adapta */}
       <div
-        className={`w-full transition-all duration-300 flex flex-col ${
+        className={`w-full flex-1 flex flex-col transition-all duration-300 ${
           isPhoneFrame
-            ? 'max-w-[430px] min-h-[92vh] sm:rounded-[42px] border sm:border-rose-500/25 shadow-2xl shadow-rose-950/20 bg-dark-950 overflow-hidden relative sm:my-2 ring-1 ring-white/10'
-            : 'max-w-7xl min-h-screen lg:px-6'
+            ? 'w-full min-h-screen md:max-w-[430px] md:min-h-[92vh] md:my-6 md:mx-auto md:rounded-[42px] md:border md:border-rose-500/25 md:shadow-2xl md:shadow-rose-950/20 md:ring-1 md:ring-white/10 md:overflow-hidden bg-dark-950'
+            : 'w-full min-h-screen md:max-w-7xl md:mx-auto md:px-6'
         }`}
       >
         {/* Cabecera con reloj, progreso y acciones adaptables a PC */}
@@ -347,21 +347,19 @@ export default function App() {
           </div>
         )}
 
-        {/* Botón Flotante para Añadir Actividad (solo visible en modo móvil) */}
-        {isPhoneFrame && (
-          <div className="sticky bottom-4 left-0 right-0 px-5 flex justify-end pointer-events-none z-10">
-            <button
-              onClick={() => {
-                setActividadEditar(null);
-                setIsFormOpen(true);
-              }}
-              className="pointer-events-auto p-3.5 rounded-2xl bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-400 hover:to-rose-500 text-dark-950 font-bold shadow-lg shadow-rose-950/60 border border-rose-400/40 hover:scale-105 active:scale-95 transition-all flex items-center gap-2 group"
-            >
-              <Plus className="w-5 h-5 stroke-[2.5]" />
-              <span className="text-xs tracking-wide">Nueva Tarea</span>
-            </button>
-          </div>
-        )}
+        {/* Botón Flotante para Añadir Actividad en móvil */}
+        <div className="fixed md:sticky bottom-5 right-5 z-20 pointer-events-none safe-bottom flex justify-end">
+          <button
+            onClick={() => {
+              setActividadEditar(null);
+              setIsFormOpen(true);
+            }}
+            className="pointer-events-auto p-3.5 rounded-2xl bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-400 hover:to-rose-500 text-dark-950 font-bold shadow-lg shadow-rose-950/60 border border-rose-400/40 hover:scale-105 active:scale-95 transition-all flex items-center gap-2 group"
+          >
+            <Plus className="w-5 h-5 stroke-[2.5]" />
+            <span className="text-xs tracking-wide">Nueva Tarea</span>
+          </button>
+        </div>
       </div>
 
       {/* Modal de Vista de Detalles */}
