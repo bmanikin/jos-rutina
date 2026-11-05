@@ -2,15 +2,29 @@
   "short_name": "Jos Rutina",
   "name": "Jos Rutina - Planificador Diario",
   "description": "Aplicación móvil de productividad y rutina personal",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
   "icons": [
     {
-      "src": "/icon.svg",
+      "src": "./icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon.svg",
       "type": "image/svg+xml",
       "sizes": "any",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ],
-  "start_url": "/",
   "background_color": "#09090b",
   "theme_color": "#09090b",
   "display": "standalone",
