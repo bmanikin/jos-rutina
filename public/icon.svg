@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#121114"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fda4af"/>
+      <stop offset="50%" stop-color="#f472b6"/>
+      <stop offset="100%" stop-color="#be185d"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Squircle Background -->
+  <rect width="512" height="512" rx="128" fill="url(#bg)"/>
+  <rect width="504" height="504" x="4" y="4" rx="124" fill="none" stroke="rgba(244, 114, 182, 0.3)" stroke-width="8"/>
+
+  <!-- Glowing Cat Silhouette & Calendar Motif -->
+  <g filter="url(#glow)" transform="translate(106, 106)">
+    <!-- Cat Head & Ears -->
+    <path d="M 40 100 L 70 30 L 130 70 L 170 70 L 230 30 L 260 100 C 290 150 290 220 250 260 C 210 290 90 290 50 260 C 10 220 10 150 40 100 Z" fill="none" stroke="url(#roseGrad)" stroke-width="16" stroke-linejoin="round" stroke-linecap="round"/>
+    <!-- Cute Eyes / Sparkles -->
+    <ellipse cx="100" cy="160" rx="12" ry="16" fill="#fbcfe8"/>
+    <ellipse cx="200" cy="160" rx="12" ry="16" fill="#fbcfe8"/>
+    <!-- Cute Nose & Mouth -->
+    <polygon points="150,185 142,175 158,175" fill="#f472b6"/>
+    <path d="M 150 185 Q 135 200 125 195 M 150 185 Q 165 200 175 195" fill="none" stroke="#f472b6" stroke-width="8" stroke-linecap="round"/>
+    <!-- Whiskers -->
+    <line x1="60" y1="175" x2="10" y2="165" stroke="rgba(251, 207, 232, 0.6)" stroke-width="6" stroke-linecap="round"/>
+    <line x1="60" y1="190" x2="10" y2="195" stroke="rgba(251, 207, 232, 0.6)" stroke-width="6" stroke-linecap="round"/>
+    <line x1="240" y1="175" x2="290" y2="165" stroke="rgba(251, 207, 232, 0.6)" stroke-width="6" stroke-linecap="round"/>
+    <line x1="240" y1="190" x2="290" y2="195" stroke="rgba(251, 207, 232, 0.6)" stroke-width="6" stroke-linecap="round"/>
+  </g>
+</svg>
