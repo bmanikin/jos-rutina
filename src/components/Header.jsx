@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Bell, Sparkles, Smartphone, Monitor, BarChart3, Volume2, Cat } from 'lucide-react';
+import { Bell, Sparkles, Smartphone, Monitor, BarChart3, Volume2, Cat, Download } from 'lucide-react';
 import { solicitarPermisoNotificaciones, simularAlertaPrueba } from '../services/notificationService';
 
 export default function Header({
@@ -12,13 +12,24 @@ export default function Header({
 }) {
   const [horaActual, setHoraActual] = useState(new Date());
   const [notifPerm, setNotifPerm] = useState('default');
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
 
   useEffect(() => {
     const timer = setInterval(() => setHoraActual(new Date()), 1000);
     if ('Notification' in window) {
       setNotifPerm(Notification.permission);
     }
-    return () => clearInterval(timer);
+
+    const installHandler = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+    window.addEventListener('beforeinstallprompt', installHandler);
+
+    return () => {
+      clearInterval(timer);
+      window.removeEventListener('beforeinstallprompt', installHandler);
+    };
   }, []);
 
   const totalActividades = actividades.length;
@@ -36,6 +47,16 @@ export default function Header({
   const handleProbarAlerta = () => {
     const actConAlerta = actividades.find((a) => a.alerta10Min) || actividades[0];
     simularAlertaPrueba(actConAlerta);
+  };
+
+  const handleInstallClick = async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        setDeferredPrompt(null);
+      }
+    }
   };
 
   // Formato bonito de hora
@@ -67,6 +88,18 @@ export default function Header({
 
         {/* Acciones de la cabecera */}
         <div className="flex items-center gap-1.5">
+          {/* Botón Instalar App (si está disponible) */}
+          {deferredPrompt && (
+            <button
+              onClick={handleInstallClick}
+              title="Instalar como app en tu celular"
+              className="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-400 hover:to-rose-500 text-dark-950 font-bold text-xs flex items-center gap-1 shadow-rose-glow animate-pulse"
+            >
+              <Download className="w-3.5 h-3.5 stroke-[2.5]" />
+              <span className="text-[11px]">Instalar</span>
+            </button>
+          )}
+
           {/* Botón probar alerta */}
           <button
             onClick={handleProbarAlerta}
